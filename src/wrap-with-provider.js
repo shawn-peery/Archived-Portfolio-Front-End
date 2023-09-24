@@ -4,7 +4,6 @@ import { MsalProvider } from '@azure/msal-react';
 import { msalConfig } from './authConfig';
 // import { ThemeProvider } from '@mui/material/styles';
 // import { theme } from './styles/theme';
-import { CustomNavigationClient } from './utils/NavigationClient';
 
 import { EventType } from '@azure/msal-browser';
 
@@ -34,9 +33,9 @@ msalInstance.addEventCallback((event) => {
 });
 
 export default ({ element }) => {
-  // The next 2 lines are optional. This is how you configure MSAL to take advantage of the router's navigate functions when MSAL redirects between pages in your app
-  const navigationClient = new CustomNavigationClient();
-  msalInstance.setNavigationClient(navigationClient);
+  // // The next 2 lines are optional. This is how you configure MSAL to take advantage of the router's navigate functions when MSAL redirects between pages in your app
+  // const navigationClient = new CustomNavigationClient();
+  // msalInstance.setNavigationClient(navigationClient);
 
   return (
     // <ThemeProvider theme={theme}>
