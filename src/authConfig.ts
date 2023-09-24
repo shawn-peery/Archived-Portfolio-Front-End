@@ -3,7 +3,7 @@
  * Licensed under the MIT License.
  */
 
-const { LogLevel } = require('@azure/msal-browser');
+import { LogLevel } from '@azure/msal-browser';
 
 /**
  * Configuration object to be passed to MSAL instance on creation.
@@ -24,7 +24,7 @@ export const msalConfig = {
   },
   system: {
     loggerOptions: {
-      loggerCallback: (level, message, containsPii) => {
+      loggerCallback: (level: any, message: any, containsPii: any) => {
         if (containsPii) {
           return;
         }
