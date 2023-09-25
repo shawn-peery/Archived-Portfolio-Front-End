@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react';
-
 import { useMsalAuthentication, useMsal } from '@azure/msal-react';
 import { InteractionType } from '@azure/msal-browser';
 
 import { msalConfig, protectedResources } from '../authConfig';
 import { getClaimsFromStorage } from '../utils/storageUtils';
 import { callApiWithToken } from '../fetch';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const ProfileContent = () => {
+const Profile = () => {
   /**
    * useMsal is hook that returns the PublicClientApplication instance,
    * an array of all accounts currently signed in and an inProgress value
@@ -17,7 +15,7 @@ const ProfileContent = () => {
    */
   const { instance } = useMsal();
   const account = instance.getActiveAccount();
-  const [graphData, setGraphData] = useState(null);
+  const [graphData, setGraphData] = useState();
   const resource = new URL(protectedResources.apiHello.endpoint).hostname;
 
   const request = {
@@ -83,6 +81,4 @@ const ProfileContent = () => {
   );
 };
 
-export const Profile = () => {
-  return <ProfileContent />;
-};
+export default Profile;

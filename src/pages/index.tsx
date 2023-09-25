@@ -1,7 +1,7 @@
-import * as React from 'react';
 import type { HeadFC, PageProps } from 'gatsby';
 import axios from 'axios';
 import Layout from '../components/Layout';
+import React from 'react';
 
 const pageStyles = {
   color: '#232129',
@@ -138,15 +138,19 @@ const links = [
   },
 ];
 
+// const [testToggle, setTestToggle] = useState<boolean>(false);
+
 const handleTestButton = () => {
   axios.get('https://localhost:7218/test/test');
+  // setTestToggle((testToggle) => !testToggle);
 };
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <Layout>
       <main style={pageStyles}>
-        <h1>Test Two</h1>
+        <h1>test</h1>
+        {/* <h1>{testToggle ? 'True' : 'False'}</h1> */}
         <button onClick={() => handleTestButton()}>Test Button</button>
         <h1 style={headingStyles}>
           Congratulations
