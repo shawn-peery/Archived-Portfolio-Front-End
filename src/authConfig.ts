@@ -14,8 +14,8 @@ export const msalConfig = {
   auth: {
     clientId: '5bfd4be5-411c-4af0-aff3-cf7717752729', // This is the ONLY mandatory field that you need to supply.
     authority: 'https://login.microsoftonline.com/bfda8924-84e6-4cd1-9fba-ce60f959cfd3', // Defaults to "https://login.microsoftonline.com/common"
-    redirectUri: 'http://localhost:8000//', // You must register this URI on Azure Portal/App Registration. Defaults to window.location.origin
-    postLogoutRedirectUri: 'http://localhost:8000//', // Indicates the page to navigate after logout.
+    redirectUri: 'https://localhost:8000/redirect', // You must register this URI on Azure Portal/App Registration. Defaults to window.location.origin
+    postLogoutRedirectUri: 'https://localhost:8000', // Indicates the page to navigate after logout.
     clientCapabilities: ['CP1'],
   },
   cache: {
@@ -56,7 +56,7 @@ export const msalConfig = {
 export const protectedResources = {
   apiHello: {
     endpoint: 'http://localhost:5000/api/profile',
-    scopes: ['api://Enter_the_Web_Api_Application_Id_Here/.default'],
+    scopes: ['api://40a0f5e2-616a-459c-b0c2-f5fca9d93270/.default'],
   },
 };
 
