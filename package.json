@@ -8,14 +8,16 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
+    "develop": "gatsby develop --https",
+    "start": "gatsby develop --https",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@azure/msal-browser": "^3.1.0",
+    "@azure/msal-react": "^2.0.3",
     "@mdx-js/react": "^2.3.0",
     "axios": "^1.5.0",
     "eslint": "^7.32.0",
