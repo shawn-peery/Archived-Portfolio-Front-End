@@ -55,7 +55,7 @@ export const msalConfig = {
  */
 export const protectedResources = {
   apiHello: {
-    endpoint: 'http://localhost:5000/api/profile',
+    endpoint: 'https://localhost:7218/api/profile/profile',
     scopes: ['api://40a0f5e2-616a-459c-b0c2-f5fca9d93270/.default'],
   },
 };

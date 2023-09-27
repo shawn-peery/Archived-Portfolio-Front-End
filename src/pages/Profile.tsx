@@ -74,6 +74,7 @@ const Profile = () => {
 
   return (
     <>
+      <h1>Hi</h1>
       {graphData ? (
         <textarea value={JSON.stringify(graphData, null, 4)} style={{ height: '20rem' }}></textarea>
       ) : null}

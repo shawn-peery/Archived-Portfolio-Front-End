@@ -5,7 +5,7 @@
       "type": "chrome",
       "request": "launch",
       "name": "Gatsby",
-      "url": "http://localhost:8000",
+      "url": "https://localhost:8000",
       "webRoot": "${workspaceFolder}",
       "sourceMapPathOverrides": {
         "gatsby-plugin-typescript": "${workspaceFolder}/.cache/gatsby-browser-entry.js"
