@@ -1,6 +1,6 @@
 import type { HeadFC, PageProps } from 'gatsby';
 import axios from 'axios';
-import Layout from '../components/Layout';
+import Layout from '../theme/Layout';
 import React from 'react';
 
 const pageStyles = {
