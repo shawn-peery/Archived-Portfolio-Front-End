@@ -11,6 +11,8 @@
     "develop": "gatsby develop --https",
     "start": "gatsby develop --https",
     "build": "gatsby build",
+    "test": "jest",
+    "testw": "jest --watch",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit"
@@ -19,6 +21,7 @@
     "@azure/msal-browser": "^3.1.0",
     "@azure/msal-react": "^2.0.3",
     "@mdx-js/react": "^2.3.0",
+    "@testing-library/jest-dom": "^4.2.4",
     "axios": "^1.5.0",
     "eslint": "^7.32.0",
     "gatsby": "^5.12.4",
@@ -32,14 +35,22 @@
     "gatsby-transformer-remark": "^6.12.0",
     "gatsby-transformer-sharp": "^5.12.0",
     "generate-react-cli": "^8.3.0",
+    "jest-environment-jsdom": "^29.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.68.0"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.23.0",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.5",
     "@types/node": "^20.3.3",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "babel-jest": "^29.7.0",
+    "babel-preset-gatsby": "^3.12.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
     "prettier": "3.0.3",
     "typescript": "^5.1.6"
   }
