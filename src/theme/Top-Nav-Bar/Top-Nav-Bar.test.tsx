@@ -15,7 +15,7 @@ describe('<TopNavBar />', () => {
   it('should show a home link with correct href', () => {
     render(<TopNavBar />);
 
-    const homeLink = screen.getAllByRole('link', { name: /home/i });
+    const homeLink = screen.getByRole('link', { name: /home/i });
 
     expect(homeLink).toHaveTextContent(/home/i);
   });

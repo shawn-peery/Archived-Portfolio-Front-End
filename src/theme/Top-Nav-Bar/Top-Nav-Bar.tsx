@@ -7,7 +7,7 @@ interface TopNavBarProps {}
 
 const TopNavBar = ({}: TopNavBarProps) => (
   <nav>
-    <Link to="/index">Home</Link>
+    <Link to="/home">Home</Link>
     <Link to="/profile">Profile</Link>
   </nav>
 );
