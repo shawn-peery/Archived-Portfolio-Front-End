@@ -6,8 +6,8 @@ import * as styles from './Top-Nav-Bar.module.scss';
 interface TopNavBarProps {}
 
 const TopNavBar = ({}: TopNavBarProps) => (
-  <nav>
-    <Link to="/home">Home</Link>
+  <nav className={styles.TopNavBar}>
+    <Link to="/index">Home</Link>
     <Link to="/profile">Profile</Link>
   </nav>
 );

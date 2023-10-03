@@ -3,6 +3,8 @@ import React, { ReactNode } from 'react';
 import { MsalProvider } from '@azure/msal-react';
 import TopNavBar from './Top-Nav-Bar/Top-Nav-Bar';
 
+import './global.scss';
+
 interface LayoutProps {
   children: ReactNode;
 }

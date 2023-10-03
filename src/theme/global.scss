@@ -1,0 +1,10 @@
+html {
+  background-color: #00635d;
+}
+
+a {
+  color: white;
+  &:hover {
+    color: lightgray;
+  }
+}
