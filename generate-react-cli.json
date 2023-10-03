@@ -6,6 +6,11 @@
   "testLibrary": "Testing Library",
   "component": {
     "default": {
+      "customTemplates": {
+        "component": "./src/generate-react-cli-templates/TemplateName.tsx",
+        "style": "./src/generate-react-cli-templates/TemplateName.module.scss",
+        "test": "./src/generate-react-cli-templates/TemplateName.test.tsx"
+      },
       "path": "src/components",
       "withStyle": true,
       "withTest": true,
