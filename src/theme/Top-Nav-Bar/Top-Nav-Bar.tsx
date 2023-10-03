@@ -5,11 +5,11 @@ import * as styles from './Top-Nav-Bar.module.scss';
 
 interface TopNavBarProps {}
 
-const TopNavBar: FC<TopNavBarProps> = () => (
-  <div className={styles.TopNavBar} data-testid="TopNavBar">
+const TopNavBar = ({}: TopNavBarProps) => (
+  <nav>
+    <Link to="/index">Home</Link>
     <Link to="/profile">Profile</Link>
-    {/* <button>Test</button> */}
-  </div>
+  </nav>
 );
 
 export default TopNavBar;
