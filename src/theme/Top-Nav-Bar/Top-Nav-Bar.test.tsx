@@ -17,7 +17,7 @@ describe('<TopNavBar />', () => {
 
     const homeLink = screen.getByRole('link', { name: /home/i });
 
-    expect(homeLink).toHaveTextContent(/home/i);
+    expect(homeLink).toHaveAttribute('href', '/');
   });
 
   it('should show a profile link with correct href', () => {
@@ -25,6 +25,6 @@ describe('<TopNavBar />', () => {
 
     const profileLink = screen.getByRole('link', { name: /profile/i });
 
-    expect(profileLink).toHaveTextContent(/profile/i);
+    expect(profileLink).toHaveAttribute('href', '/profile');
   });
 });
