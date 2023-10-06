@@ -1,7 +1,19 @@
 .TopNavBar {
   background-color: #01172f;
   padding: 1rem 3rem;
+
+  & li {
+    display: inline;
+  }
+
   & a {
     padding: 1rem;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    &:hover {
+      color: lightgray;
+    }
   }
 }
