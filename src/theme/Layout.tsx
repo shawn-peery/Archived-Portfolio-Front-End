@@ -1,6 +1,9 @@
 import React, { ReactNode } from 'react';
 
 import { MsalProvider } from '@azure/msal-react';
+import TopNavBar from './Top-Nav-Bar/Top-Nav-Bar';
+
+import './global.scss';
 
 interface LayoutProps {
   children: ReactNode;
@@ -11,7 +14,11 @@ const Layout = ({ children }: LayoutProps) => {
 
   console.log('GLOBAL:');
   console.log(global);
-  return <>{children}</>;
+  return (
+    <>
+      <TopNavBar>{children}</TopNavBar>
+    </>
+  );
 };
 
 export default Layout;

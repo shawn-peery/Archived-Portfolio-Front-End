@@ -5,6 +5,7 @@ import { msalConfig, protectedResources } from '../authConfig';
 import { getClaimsFromStorage } from '../utils/storageUtils';
 import { callApiWithToken } from '../fetch';
 import React, { useState, useEffect } from 'react';
+import Layout from '../theme/Layout';
 
 const Profile = () => {
   /**
@@ -73,12 +74,12 @@ const Profile = () => {
   }
 
   return (
-    <>
+    <Layout>
       <h1>Hi</h1>
       {graphData ? (
         <textarea value={JSON.stringify(graphData, null, 4)} style={{ height: '20rem' }}></textarea>
       ) : null}
-    </>
+    </Layout>
   );
 };
 
