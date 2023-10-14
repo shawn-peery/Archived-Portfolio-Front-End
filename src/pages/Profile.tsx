@@ -1,18 +1,12 @@
-import type { HeadFC, PageProps } from 'gatsby';
-import { useMsalAuthentication, useMsal } from '@azure/msal-react';
-import { InteractionType } from '@azure/msal-browser';
+import type { HeadFC } from 'gatsby';
 
-import { msalConfig, TargetScope } from '../authConfig';
-import { getClaimsFromStorage } from '../utils/storageUtils';
-import { callApiWithToken } from '../fetch';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Layout from '../theme/Layout';
 import useRequestWithAccessToken from '../hooks/useRequestWithAccessToken';
+import { TodoService } from '../apiServices';
 
 const Profile = () => {
-  const [graphData, error] = useRequestWithAccessToken(
-    'https://localhost:7218/api/profile/profile',
-  );
+  const [graphData, error] = useRequestWithAccessToken(TodoService.CreateTodo);
 
   if (error) {
     return <div>Error: {error.message}</div>;
