@@ -53,11 +53,8 @@ export const msalConfig = {
  * Add here the endpoints and scopes when obtaining an access token for protected web APIs. For more information, see:
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
  */
-export const protectedResources = {
-  apiHello: {
-    endpoint: 'https://localhost:7218/api/profile/profile',
-    scopes: ['api://40a0f5e2-616a-459c-b0c2-f5fca9d93270/.default'],
-  },
+export const TargetScopes = {
+  scopes: ['api://40a0f5e2-616a-459c-b0c2-f5fca9d93270/.default'],
 };
 
 /**
@@ -67,5 +64,5 @@ export const protectedResources = {
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest = {
-  scopes: [...protectedResources.apiHello.scopes],
+  scopes: [TargetScopes.scopes],
 };
