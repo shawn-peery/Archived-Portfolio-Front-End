@@ -25,32 +25,6 @@ const todos = () => {
     ReturnModelWithMessageDto<ViewTodoDto>
   >(TodoService.CreateTodo, 'POST');
 
-  useEffect(() => {
-    if (authResult) {
-      const promise = callApiMethod();
-
-      if (isNullOrUndefined(promise)) {
-        return;
-      }
-
-      promise
-        .then((result) => {
-          const { Message: message, Model: model } = result;
-
-          if (isNotNullNorUndefinedNorEmptyString(message)) {
-            console.log(`Todo Response Message: ${message}`);
-
-            alert(`Todo Response Message: ${message}`);
-          }
-
-          setTodos((oldTodos) => [...oldTodos, model]);
-        })
-        .catch((e) => {
-          console.error(`Error: ${e}`);
-        });
-    }
-  }, [authResult, callApiMethod, isNullOrUndefined, isNotNullNorUndefinedNorEmptyString, setTodos]);
-
   if (error !== undefined && error !== null) {
     console.error(`Error: ${error.message}`);
     return <div>Error: {error.message}</div>;
@@ -64,6 +38,28 @@ const todos = () => {
     if (isNullOrUndefinedOrEmptyString(createNewTodoDescription)) {
       alert('Please provide a description!');
     }
+
+    const promise = callApiMethod();
+
+    if (isNullOrUndefined(promise)) {
+      return;
+    }
+
+    promise
+      .then((result) => {
+        const { Message: message, Model: model } = result;
+
+        if (isNotNullNorUndefinedNorEmptyString(message)) {
+          console.log(`Todo Response Message: ${message}`);
+
+          alert(`Todo Response Message: ${message}`);
+        }
+
+        setTodos((oldTodos) => [...oldTodos, model]);
+      })
+      .catch((e) => {
+        console.error(`Error: ${e}`);
+      });
   };
 
   return (
@@ -77,7 +73,7 @@ const todos = () => {
           </li>
         ))}
       </ul>
-      <label>
+      <label style={{ display: 'block' }}>
         Title
         <input
           type="text"
@@ -86,7 +82,7 @@ const todos = () => {
         />
       </label>
 
-      <label>
+      <label style={{ display: 'block' }}>
         Description
         <input
           type="text"
