@@ -86,7 +86,7 @@ const todos = () => {
         Description
         <input
           type="text"
-          value={createNewTodoTitle}
+          value={createNewTodoDescription}
           onChange={(e) => {
             setCreateNewTodoDescription(e.target.value);
           }}
