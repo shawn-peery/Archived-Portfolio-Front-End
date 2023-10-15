@@ -49,7 +49,7 @@ const todos = () => {
           console.error(`Error: ${e}`);
         });
     }
-  }, [authResult, callApiMethod, isNotNullNorUndefinedNorEmptyString, setTodos]);
+  }, [authResult, callApiMethod, isNullOrUndefined, isNotNullNorUndefinedNorEmptyString, setTodos]);
 
   if (error !== undefined && error !== null) {
     console.error(`Error: ${error.message}`);
