@@ -10,8 +10,12 @@ import { TargetScopes, msalConfig } from '../authConfig';
 import { callApiWithToken } from '../fetch';
 import { getClaimsFromStorage } from '../utils/storageUtils';
 import { AvailableHttpMethodOptions } from '../utils/HttpMethodUtils';
+import { isNullOrUndefined } from '../utils/IsNullOrUndefined';
 
-const useAcquireAccessToken = <T>(): [AuthenticationResult | null, AuthError | null] =>
+const useAcquireAccessToken = <T>(
+  requestURL: string,
+  method: AvailableHttpMethodOptions,
+): [AuthenticationResult | null, AuthError | null, () => Promise<unknown> | null] =>
   // callbackInteractionType?: InteractionType | undefined,
   // callbackRequest?: SilentRequest | undefined,
   {
@@ -65,7 +69,23 @@ const useAcquireAccessToken = <T>(): [AuthenticationResult | null, AuthError | n
       }
     }, [authResult, authError, acquireToken]);
 
-    return [authResult, authError];
+    const callApiWithTokenInternal = useCallback(() => {
+      if (isNullOrUndefined(authResult)) {
+        return null;
+      }
+
+      return callApiWithToken(authResult.accessToken, requestURL, account, method).catch(
+        (error) => {
+          if (error.message === 'claims_challenge_occurred') {
+            acquireToken(InteractionType.Redirect, request as any);
+          } else {
+            console.log(error);
+          }
+        },
+      );
+    }, [isNullOrUndefined, authResult, authError, authResult, requestURL, account, method]);
+
+    return [authResult, authError, callApiWithTokenInternal];
   };
 
 export default useAcquireAccessToken;
