@@ -3,10 +3,10 @@ import type { HeadFC } from 'gatsby';
 import React from 'react';
 import Layout from '../theme/Layout';
 import useRequestWithAccessToken from '../hooks/useRequestWithAccessToken';
-import { TodoService } from '../apiServices';
+import { ProfileService, TodoService } from '../apiServices';
 
 const Profile = () => {
-  const [graphData, error] = useRequestWithAccessToken(TodoService.CreateTodo);
+  const [graphData, error] = useRequestWithAccessToken<string>(ProfileService.GetProfileInfo);
 
   if (error) {
     return <div>Error: {error.message}</div>;

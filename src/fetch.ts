@@ -6,6 +6,7 @@
 import { msalConfig } from './authConfig';
 import { addClaimsToStorage } from './utils/storageUtils';
 import { parseChallenges } from './utils/claimUtils';
+import { AvailableHttpMethodOptions } from './utils/HttpMethodUtils';
 
 /**
  * Makes a fetch call to the API endpoint with the access token in the Authorization header
@@ -13,14 +14,19 @@ import { parseChallenges } from './utils/claimUtils';
  * @param {string} apiEndpoint
  * @returns
  */
-export const callApiWithToken = async (accessToken: any, apiEndpoint: any, account: any) => {
+export const callApiWithToken = async (
+  accessToken: any,
+  apiEndpoint: any,
+  account: any,
+  method: AvailableHttpMethodOptions,
+) => {
   const headers = new Headers();
   const bearer = `Bearer ${accessToken}`;
 
   headers.append('Authorization', bearer);
 
   const options = {
-    method: 'GET',
+    method: method,
     headers: headers,
   };
 

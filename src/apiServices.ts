@@ -6,5 +6,9 @@ import { ViewTodoDto } from './models/ViewTodoDto';
 const root = 'https://localhost:7218/api/';
 
 export const TodoService = {
-  CreateTodo: root + 'profile/profile',
+  CreateTodo: root + 'todo/createtodo',
+};
+
+export const ProfileService = {
+  GetProfileInfo: root + 'profile/profile',
 };
