@@ -1,6 +1,6 @@
-import { InteractionType, AuthError } from '@azure/msal-browser';
+import { InteractionType, AuthError, AuthenticationResult } from '@azure/msal-browser';
 import { useMsal, useMsalAuthentication } from '@azure/msal-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { TargetScopes, msalConfig } from '../authConfig';
 import { callApiWithToken } from '../fetch';
 import { getClaimsFromStorage } from '../utils/storageUtils';
@@ -9,7 +9,7 @@ import { AvailableHttpMethodOptions } from '../utils/HttpMethodUtils';
 const useRequestWithAccessToken = <T>(
   requestURL: string,
   method: AvailableHttpMethodOptions = 'GET',
-): [T | null, AuthError | null] => {
+): [AuthenticationResult | null, AuthError | null, () => Promise<T> | null] => {
   /**
    * useMsal is hook that returns the PublicClientApplication instance,
    * an array of all accounts currently signed in and an inProgress vale
@@ -18,7 +18,6 @@ const useRequestWithAccessToken = <T>(
    */
   const { instance } = useMsal();
   const account = instance.getActiveAccount();
-  const [responseData, setResponseData] = useState();
   const resource = new URL(requestURL).hostname;
 
   const request = {
@@ -37,40 +36,38 @@ const useRequestWithAccessToken = <T>(
         : undefined, // e.g {"access_token":{"xms_cc":{"values":["cp1"]}}}
   };
 
-  const { acquireToken, result, error } = useMsalAuthentication(InteractionType.Popup, {
+  const {
+    acquireToken,
+    result: authResult,
+    error: authError,
+  } = useMsalAuthentication(InteractionType.Popup, {
     ...request,
     redirectUri: '/redirect',
   } as any);
 
   useEffect(() => {
-    if (!!responseData) {
-      return;
-    }
-
-    if (!!error) {
+    if (!!authError) {
       // in case popup is blocked, use redirect instead
-      if (error.errorCode === 'popup_window_error' || error.errorCode === 'empty_window_error') {
+      if (
+        authError.errorCode === 'popup_window_error' ||
+        authError.errorCode === 'empty_window_error'
+      ) {
         acquireToken(InteractionType.Redirect, request as any);
       }
 
-      console.log(error);
+      console.log(authError);
       return;
     }
+  }, [authResult, authError, acquireToken]);
 
-    if (result) {
-      callApiWithToken(result.accessToken, requestURL, account, method)
-        .then((response) => setResponseData(response))
-        .catch((error) => {
-          if (error.message === 'claims_challenge_occurred') {
-            acquireToken(InteractionType.Redirect, request as any);
-          } else {
-            console.log(error);
-          }
-        });
+  const callApiWithTokenInternal = useCallback(() => {
+    if (authResult) {
+      return callApiWithToken<T>(authResult.accessToken, requestURL, account, method);
     }
-  }, [responseData, result, error, acquireToken]);
+    return null;
+  }, [authResult, requestURL, account, method]);
 
-  return [responseData as T, error];
+  return [authResult, authError, callApiWithTokenInternal];
 };
 
 export default useRequestWithAccessToken;

@@ -14,7 +14,7 @@ import { AvailableHttpMethodOptions } from './utils/HttpMethodUtils';
  * @param {string} apiEndpoint
  * @returns
  */
-export const callApiWithToken = async (
+export const callApiWithToken = async <T>(
   accessToken: any,
   apiEndpoint: any,
   account: any,
@@ -31,7 +31,7 @@ export const callApiWithToken = async (
   };
 
   const response = await fetch(apiEndpoint, options);
-  return handleClaimsChallenge(response, apiEndpoint, account);
+  return handleClaimsChallenge(response, apiEndpoint, account) as T;
 };
 
 /**

@@ -13,6 +13,7 @@ import {
 } from '../utils/IsNullOrUndefined';
 import { CreateTodoDto } from '../models/CreateTodoDto';
 import { title } from 'process';
+import { callApiWithToken } from '../fetch';
 
 const todos = () => {
   const [todos, setTodos] = useState<ViewTodoDto[]>([]);
@@ -20,23 +21,35 @@ const todos = () => {
   const [createNewTodoTitle, setCreateNewTodoTitle] = useState<string>('');
   const [createNewTodoDescription, setCreateNewTodoDescription] = useState<string>('');
 
-  const [responseObjFromTodoService, error] = useRequestWithAccessToken<
-    ReturnModelWithMessageDto<ViewTodoDto[]>
+  const [authResult, error, callApiMethod] = useRequestWithAccessToken<
+    ReturnModelWithMessageDto<ViewTodoDto>
   >(TodoService.CreateTodo, 'POST');
 
   useEffect(() => {
-    if (isNullOrUndefined(responseObjFromTodoService)) {
-      return;
+    if (authResult) {
+      const promise = callApiMethod();
+
+      if (isNullOrUndefined(promise)) {
+        return;
+      }
+
+      promise
+        .then((result) => {
+          const { Message: message, Model: model } = result;
+
+          if (isNotNullNorUndefinedNorEmptyString(message)) {
+            console.log(`Todo Response Message: ${message}`);
+
+            alert(`Todo Response Message: ${message}`);
+          }
+
+          setTodos((oldTodos) => [...oldTodos, model]);
+        })
+        .catch((e) => {
+          console.error(`Error: ${e}`);
+        });
     }
-
-    const message = responseObjFromTodoService.Message;
-
-    if (isNotNullNorUndefinedNorEmptyString(message)) {
-      console.log(`Todo Response Message: ${message}`);
-
-      alert(`Todo Response Message: ${message}`);
-    }
-  }, [responseObjFromTodoService, error]);
+  }, []);
 
   if (error !== undefined && error !== null) {
     console.error(`Error: ${error.message}`);
