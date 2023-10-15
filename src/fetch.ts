@@ -31,7 +31,7 @@ export const callApiWithToken = async <T>(
   };
 
   const response = await fetch(apiEndpoint, options);
-  return handleClaimsChallenge(response, apiEndpoint, account) as T;
+  return handleClaimsChallenge(response, apiEndpoint, account);
 };
 
 /**

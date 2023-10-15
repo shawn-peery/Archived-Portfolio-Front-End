@@ -12,10 +12,10 @@ import { getClaimsFromStorage } from '../utils/storageUtils';
 import { AvailableHttpMethodOptions } from '../utils/HttpMethodUtils';
 import { isNullOrUndefined } from '../utils/IsNullOrUndefined';
 
-const useAcquireAccessToken = <T>(
+const useRequestWithAccessToken = <T>(
   requestURL: string,
   method: AvailableHttpMethodOptions,
-): [AuthenticationResult | null, AuthError | null, () => Promise<unknown> | null] =>
+): [AuthenticationResult | null, AuthError | null, () => Promise<T> | null] =>
   // callbackInteractionType?: InteractionType | undefined,
   // callbackRequest?: SilentRequest | undefined,
   {
@@ -74,7 +74,7 @@ const useAcquireAccessToken = <T>(
         return null;
       }
 
-      return callApiWithToken(authResult.accessToken, requestURL, account, method).catch(
+      return callApiWithToken<T>(authResult.accessToken, requestURL, account, method).catch(
         (error) => {
           if (error.message === 'claims_challenge_occurred') {
             acquireToken(InteractionType.Redirect, request as any);
@@ -88,4 +88,4 @@ const useAcquireAccessToken = <T>(
     return [authResult, authError, callApiWithTokenInternal];
   };
 
-export default useAcquireAccessToken;
+export default useRequestWithAccessToken;
