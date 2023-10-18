@@ -15,7 +15,7 @@ import { isNullOrUndefined } from '../utils/IsNullOrUndefined';
 const useRequestWithAccessToken = <T>(
   requestURL: string,
   method: AvailableHttpMethodOptions,
-): [AuthenticationResult | null, AuthError | null, () => Promise<T> | null] =>
+): [AuthenticationResult | null, AuthError | null, (body?: unknown) => Promise<T> | null] =>
   // callbackInteractionType?: InteractionType | undefined,
   // callbackRequest?: SilentRequest | undefined,
   {
@@ -69,21 +69,24 @@ const useRequestWithAccessToken = <T>(
       }
     }, [authResult, authError, acquireToken]);
 
-    const callApiWithTokenInternal = useCallback(() => {
-      if (isNullOrUndefined(authResult)) {
-        return null;
-      }
+    const callApiWithTokenInternal = useCallback(
+      (body: unknown) => {
+        if (isNullOrUndefined(authResult)) {
+          return null;
+        }
 
-      return callApiWithToken<T>(authResult.accessToken, requestURL, account, method).catch(
-        (error) => {
-          if (error.message === 'claims_challenge_occurred') {
-            acquireToken(InteractionType.Redirect, request as any);
-          } else {
-            console.log(error);
-          }
-        },
-      );
-    }, [isNullOrUndefined, authResult, authError, authResult, requestURL, account, method]);
+        return callApiWithToken<T>(authResult.accessToken, requestURL, account, method, body).catch(
+          (error) => {
+            if (error.message === 'claims_challenge_occurred') {
+              acquireToken(InteractionType.Redirect, request as any);
+            } else {
+              console.log(error);
+            }
+          },
+        );
+      },
+      [isNullOrUndefined, authResult, authError, authResult, requestURL, account, method],
+    );
 
     return [authResult, authError, callApiWithTokenInternal];
   };

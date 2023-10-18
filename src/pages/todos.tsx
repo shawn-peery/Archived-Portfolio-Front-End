@@ -39,7 +39,10 @@ const todos = () => {
       alert('Please provide a description!');
     }
 
-    const promise = callApiMethod();
+    const promise = callApiMethod({
+      Title: createNewTodoTitle,
+      Description: createNewTodoDescription,
+    });
 
     if (isNullOrUndefined(promise)) {
       return;
