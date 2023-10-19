@@ -20,12 +20,13 @@ export const callApiWithToken = async <T>(
   apiEndpoint: any,
   account: any,
   method: AvailableHttpMethodOptions,
-  body: unknown,
+  body?: unknown,
 ) => {
   const headers = new Headers();
   const bearer = `Bearer ${accessToken}`;
 
   headers.append('Authorization', bearer);
+  headers.append('Content-Type', 'application/json;charset=utf-8');
 
   const options: RequestInit = {
     method: method,
