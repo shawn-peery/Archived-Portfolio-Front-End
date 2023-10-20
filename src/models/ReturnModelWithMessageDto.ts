@@ -1,9 +1,9 @@
 export class ReturnModelWithMessageDto<T> {
-  Message = '';
-  Model: T;
+  message = '';
+  model: T;
 
   constructor(Message: string, Model: T) {
-    this.Message = Message;
-    this.Model = Model;
+    this.message = Message;
+    this.model = Model;
   }
 }

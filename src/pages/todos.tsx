@@ -50,7 +50,7 @@ const todos = () => {
 
     promise
       .then((result) => {
-        const { Message: message, Model: model } = result;
+        const { message: message, model: model } = result;
 
         if (isNotNullNorUndefinedNorEmptyString(message)) {
           console.log(`Todo Response Message: ${message}`);
@@ -70,9 +70,9 @@ const todos = () => {
       <h1>Todos</h1>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.Title}>
-            <h2>{todo.Title}</h2>
-            <p>{todo.Description}</p>
+          <li key={todo.title}>
+            <h2>{todo.title}</h2>
+            <p>{todo.description}</p>
           </li>
         ))}
       </ul>

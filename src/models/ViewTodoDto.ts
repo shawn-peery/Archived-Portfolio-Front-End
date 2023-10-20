@@ -1,9 +1,9 @@
 export class ViewTodoDto {
-  Title = '';
-  Description = '';
+  title = '';
+  description = '';
 
   constructor(obj?: ViewTodoDto) {
-    this.Title = obj?.Title ?? '';
-    this.Description = obj?.Description ?? '';
+    this.title = obj?.title ?? '';
+    this.description = obj?.description ?? '';
   }
 }
