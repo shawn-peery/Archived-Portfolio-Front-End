@@ -6,6 +6,8 @@
 import { msalConfig } from './authConfig';
 import { addClaimsToStorage } from './utils/storageUtils';
 import { parseChallenges } from './utils/claimUtils';
+import { AvailableHttpMethodOptions } from './utils/HttpMethodUtils';
+import { isNotNullNorUndefined } from './utils/IsNullOrUndefined';
 
 /**
  * Makes a fetch call to the API endpoint with the access token in the Authorization header
@@ -13,16 +15,27 @@ import { parseChallenges } from './utils/claimUtils';
  * @param {string} apiEndpoint
  * @returns
  */
-export const callApiWithToken = async (accessToken: any, apiEndpoint: any, account: any) => {
+export const callApiWithToken = async <T>(
+  accessToken: any,
+  apiEndpoint: any,
+  account: any,
+  method: AvailableHttpMethodOptions,
+  body?: unknown,
+) => {
   const headers = new Headers();
   const bearer = `Bearer ${accessToken}`;
 
   headers.append('Authorization', bearer);
+  headers.append('Content-Type', 'application/json;charset=utf-8');
 
-  const options = {
-    method: 'GET',
+  const options: RequestInit = {
+    method: method,
     headers: headers,
   };
+
+  if (isNotNullNorUndefined(body)) {
+    options.body = JSON.stringify(body);
+  }
 
   const response = await fetch(apiEndpoint, options);
   return handleClaimsChallenge(response, apiEndpoint, account);

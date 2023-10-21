@@ -16,7 +16,8 @@ const Layout = ({ children }: LayoutProps) => {
   console.log(global);
   return (
     <>
-      <TopNavBar>{children}</TopNavBar>
+      <TopNavBar />
+      {children}
     </>
   );
 };

@@ -205,3 +205,8 @@ const IndexPage: React.FC<PageProps> = () => {
 export default IndexPage;
 
 export const Head: HeadFC = () => <title>Home Page</title>;
+
+// Notes about discovering I need to restart the project to match with B2C appraoch.
+// More details in git commit
+
+// Small Update

@@ -14,6 +14,9 @@ const TopNavBar = ({}: TopNavBarProps) => (
       <li>
         <Link to="/profile">Profile</Link>
       </li>
+      <li>
+        <Link to="/todos">Todos</Link>
+      </li>
     </ul>
   </nav>
 );
